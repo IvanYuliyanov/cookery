@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_receipts">
+
+    <fragment
+        android:id="@+id/nav_receipts"
+        android:name="com.example.cookery.ui.receipts.ReceiptsFragment"
+        android:label="@string/menu_receipts"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_search"
+        android:name="com.example.cookery.ui.search.SearchFragment"
+        android:label="@string/menu_search"
+        tools:layout="@layout/fragment_gallery" />
+
+    <fragment
+        android:id="@+id/nav_favourites"
+        android:name="com.example.cookery.ui.slideshow.SlideshowFragment"
+        android:label="@string/menu_favourites"
+        tools:layout="@layout/fragment_slideshow" />
+
+    <fragment
+        android:id="@+id/nav_shopping_list"
+        android:name="com.example.cookery.ui.tools.ToolsFragment"
+        android:label="@string/menu_shopping_list"
+        tools:layout="@layout/fragment_tools" />
+
+    <fragment
+        android:id="@+id/nav_campaign"
+        android:name="com.example.cookery.ui.share.ShareFragment"
+        android:label="@string/menu_campaign"
+        tools:layout="@layout/fragment_share" />
+
+    <fragment
+        android:id="@+id/nav_stores"
+        android:name="com.example.cookery.ui.send.SendFragment"
+        android:label="@string/menu_stores"
+        tools:layout="@layout/fragment_send" />
+</navigation>
