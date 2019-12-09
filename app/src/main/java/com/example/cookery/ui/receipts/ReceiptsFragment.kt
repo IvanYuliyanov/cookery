@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cookery.R
@@ -17,27 +18,35 @@ import com.example.cookery.globalClasses.Utils
 
 
 class ReceiptsFragment : BaseFragment(), ReceiptsAdapter.OnItemClickListener {
-    lateinit var binding: ReceiptsFragmentBinding
-    lateinit var receiptsViewModel: ReceiptsViewModel
+    lateinit var mBinding: ReceiptsFragmentBinding
+    lateinit var mReceiptsViewModel: ReceiptsViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        receiptsViewModel = ViewModelProviders.of(this).get(ReceiptsViewModel::class.java)
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
+        mReceiptsViewModel = ViewModelProviders.of(this, mViewModelFactory).get(ReceiptsViewModel::class.java)
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
+        mBinding.viewmodel = mReceiptsViewModel
+        mBinding.lifecycleOwner = this
 
         init()
 
-        return binding.root
+        return mBinding.root
     }
 
     private fun init() {
-        binding.mealTypesRv?.setHasFixedSize(true)
-        binding.mealTypesRv?.layoutManager = LinearLayoutManager(activity)
+        mBinding.mealTypesRv?.setHasFixedSize(true)
+        mBinding.mealTypesRv?.layoutManager = LinearLayoutManager(activity)
 
-        binding.mealTypesRv?.adapter = ReceiptsAdapter(MealTypes.mealTypesArray, this)
+        mBinding.mealTypesRv?.adapter = ReceiptsAdapter(MealTypes.mealTypesArray, this)
+    }
+
+    private fun setObserver() {
+        mReceiptsViewModel.getReceipts().observe(this, Observer {
+
+        })
     }
 
     override fun onItemClick(mealType: String) {

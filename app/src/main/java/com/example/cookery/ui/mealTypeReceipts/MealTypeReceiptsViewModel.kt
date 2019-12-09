@@ -3,19 +3,22 @@ package com.example.cookery.ui.mealTypeReceipts
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.example.cookery.base.BaseViewModel
 import com.example.cookery.globalClasses.Utils
-import com.example.cookery.rest.API
+import com.example.cookery.rest.Repository
 import com.google.gson.JsonObject
 import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.Response
+import javax.inject.Inject
 
-class MealTypeReceiptsViewModel : BaseViewModel() {
+class MealTypeReceiptsViewModel  @Inject constructor(repository: Repository) : BaseViewModel() {
     private val TAG = MealTypeReceiptsViewModel::class.java.simpleName
 
+    var mRepository = repository
+
     var mReceipts: MutableLiveData<ArrayList<ReceiptModel>>? = null
-    var receiptsResp: ArrayList<ReceiptModel> = ArrayList()
+    var mReceiptsResp: ArrayList<ReceiptModel> = ArrayList()
 
     fun getReceipts(mealType : String, count : Int): LiveData<ArrayList<ReceiptModel>> {
         if (mReceipts == null) {
@@ -27,7 +30,7 @@ class MealTypeReceiptsViewModel : BaseViewModel() {
     }
 
     private fun loadReceipts(mealType : String, count : Int) {
-        API.receipts().getReceiptsByType( mealType, count, Utils.API_KEY).enqueue(object : retrofit2.Callback<JsonObject> {
+        mRepository.getReceipts( mealType, count, Utils.API_KEY).enqueue(object : Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                 Log.d(TAG, call.request().toString())
                 Log.d(TAG, response.body().toString())
@@ -37,7 +40,7 @@ class MealTypeReceiptsViewModel : BaseViewModel() {
 
                     for (i in resultsJsonArray) {
                         val jsonObject = i.asJsonObject
-                        receiptsResp.add(
+                        mReceiptsResp.add(
                             ReceiptModel(
                                 jsonObject.get("id").asLong,
                                 jsonObject.get("title").asString,
@@ -46,7 +49,7 @@ class MealTypeReceiptsViewModel : BaseViewModel() {
                                 jsonObject.get("readyInMinutes").asInt))
                     }
 
-                    mReceipts?.value = receiptsResp
+                    mReceipts?.value = mReceiptsResp
                     getLoading().value = GONE
                 }
             }

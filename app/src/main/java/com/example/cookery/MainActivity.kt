@@ -1,9 +1,7 @@
 package com.example.cookery
 
 import android.os.Bundle
-import android.view.Gravity
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -22,12 +20,10 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.cookery.base.BaseFragment
-import com.example.cookery.ui.mealTypeReceipts.MealTypeReceiptsFragment
 import com.example.cookery.ui.receipts.ReceiptsFragment
 import com.example.cookery.ui.search.SearchFragment
 import com.example.cookery.ui.send.SendFragment
 import dagger.android.AndroidInjection
-import dagger.android.AndroidInjector
 
 
 class MainActivity : BaseActivity(), HasSupportFragmentInjector, BaseFragment.OnFragmentInteractionListener, NavigationView.OnNavigationItemSelectedListener {
@@ -113,8 +109,8 @@ class MainActivity : BaseActivity(), HasSupportFragmentInjector, BaseFragment.On
 
         if (id == R.id.nav_receipts)
             setReceiptsFragment()
-        if (id == R.id.nav_search)
-            setSearchFragment()
+/*        if (id == R.id.nav_search)
+            setSearchFragment()*/
 
         if(mDrawerLayout.isShown)
             mDrawerLayout.closeDrawers()

@@ -26,7 +26,7 @@ import com.example.cookery.ui.mealTypeReceipts.ReceiptModel
 
 class ReceiptInstructionsFragment : BaseFragment() {
     private var mReceiptModel: ReceiptModel? = null
-    private lateinit var binding: ReceiptInstructionsFragmentBinding
+    private lateinit var mBinding: ReceiptInstructionsFragmentBinding
     private lateinit var mReceiptInstructionsViewModel: ReceiptInstructionsViewModel
 
     private var mReceiptInstructions : ArrayList<ReceiptInstructionsModel> = ArrayList()
@@ -36,16 +36,16 @@ class ReceiptInstructionsFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_receipt_instructions, container, false)
-        mReceiptInstructionsViewModel = ViewModelProviders.of(this).get(ReceiptInstructionsViewModel::class.java)
-        binding.viewmodel = mReceiptInstructionsViewModel
-        binding.lifecycleOwner = this
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_receipt_instructions, container, false)
+        mReceiptInstructionsViewModel = ViewModelProviders.of(this, mViewModelFactory).get(ReceiptInstructionsViewModel::class.java)
+        mBinding.viewmodel = mReceiptInstructionsViewModel
+        mBinding.lifecycleOwner = this
 
         init()
         setObserver()
         setUI()
 
-        return binding.root
+        return mBinding.root
     }
 
     private fun init() {
@@ -64,20 +64,20 @@ class ReceiptInstructionsFragment : BaseFragment() {
                     }
                     override fun onResourceReady(resource: Drawable?, model: Any?, target: com.bumptech.glide.request.target.Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
                         //do something when picture already loaded
-                        Utils.animateRecyclerViewItemOnScroll(binding.receiptIv, 500)
+                        Utils.animateRecyclerViewItemOnScroll(mBinding.receiptIv, 500)
                         return false
                     }
                 })
-                .into(binding.receiptIv)
+                .into(mBinding.receiptIv)
         }
 
         mReceiptModel?.let {
-            binding.receiptTitleTv.text = it.title
-            binding.receiptTimeTv.text = it.readyInMinutes.toString() + " min"
-            binding.servingsTv.text = it.servings + " servings"
+            mBinding.receiptTitleTv.text = it.title
+            mBinding.receiptTimeTv.text = it.readyInMinutes.toString() + " min"
+            mBinding.servingsTv.text = it.servings + " servings"
         }
 
-        Utils.enterTopAnimation(binding.descContainer, 750)
+        Utils.enterTopAnimation(mBinding.descContainer, 750)
     }
 
     private fun setObserver() {
@@ -91,10 +91,10 @@ class ReceiptInstructionsFragment : BaseFragment() {
                 step.setTextColor(ContextCompat.getColor(activity as Context, android.R.color.white))
                 step.setPadding(32,16,32,16)
                 step.setTextSize(TypedValue.COMPLEX_UNIT_SP,16f)
-                binding.instructionStepsContainer.addView(step)
+                mBinding.instructionStepsContainer.addView(step)
             }
 
-            Utils.animateRecyclerViewItemOnScroll(binding.instructionStepsContainer, 500)
+            Utils.animateRecyclerViewItemOnScroll(mBinding.instructionStepsContainer, 500)
         })
     }
 }

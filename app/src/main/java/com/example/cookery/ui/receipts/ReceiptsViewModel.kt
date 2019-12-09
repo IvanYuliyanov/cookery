@@ -4,26 +4,22 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.cookery.base.BaseViewModel
 import com.example.cookery.globalClasses.MealTypes
+import com.example.cookery.rest.Repository
+import javax.inject.Inject
 
-//class ReceiptsViewModel @Inject constructor(repository: Repository) : ViewModel() {
-class ReceiptsViewModel : BaseViewModel() {
-
+class ReceiptsViewModel @Inject constructor(repository: Repository) : BaseViewModel() {
     private val TAG = ReceiptsViewModel::class.java.simpleName
 
-/*    private val _text = MutableLiveData<String>().apply {
-        value = "This is receipts Fragment"
-    }
-    val text: LiveData<String> = _text*/
+    private val mRepository : Repository = repository
 
-    var receipts: MutableLiveData<Array<String>>? = null
+    var mReceipts: MutableLiveData<Array<String>>? = null
 
-    //private val mRepository : Repository = repository
 
     fun getReceipts(): LiveData<Array<String>> {
-        if (receipts == null) {
-            receipts = MutableLiveData()
-            receipts?.value = MealTypes.mealTypesArray
+        if (mReceipts == null) {
+            mReceipts = MutableLiveData()
+            mReceipts?.value = MealTypes.mealTypesArray
         }
-        return receipts as MutableLiveData<Array<String>>
+        return mReceipts as MutableLiveData<Array<String>>
     }
 }

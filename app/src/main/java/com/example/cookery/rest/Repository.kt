@@ -10,4 +10,8 @@ class Repository @Inject constructor(val repoService: Receipts) {
     fun getReceipts(mealType : String, number : Int, apiKey : String): Call<JsonObject> {
         return repoService.getReceiptsByType(mealType, number, apiKey)
     }
+
+    fun getAnalyzedInstructions(receiptId : Long, apiKey: String): Call<JsonArray> {
+        return repoService.getAnalyzedInstructions(receiptId, apiKey)
+    }
 }

@@ -5,9 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AlphaAnimation
-import android.view.animation.AnimationSet
-import android.view.animation.TranslateAnimation
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -22,7 +19,7 @@ import com.example.cookery.ui.receiptInstructions.ReceiptInstructionsFragment
 
 
 class MealTypeReceiptsFragment : BaseFragment(), MealTypeReceiptsAdapter.OnItemClickListener {
-    private lateinit var binding: MealTypeReceiptsFragmentBinding
+    private lateinit var mBinding: MealTypeReceiptsFragmentBinding
     private lateinit var mReceiptsViewModel: MealTypeReceiptsViewModel
     private lateinit var mAdapterMealType: MealTypeReceiptsAdapter
 
@@ -33,31 +30,31 @@ class MealTypeReceiptsFragment : BaseFragment(), MealTypeReceiptsAdapter.OnItemC
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_meal_type_receipts, container, false)
-        mReceiptsViewModel = ViewModelProviders.of(this).get(MealTypeReceiptsViewModel::class.java)
-        binding.viewmodel = mReceiptsViewModel
-        binding.lifecycleOwner = this
+        mReceiptsViewModel = ViewModelProviders.of(this, mViewModelFactory).get(MealTypeReceiptsViewModel::class.java)
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_meal_type_receipts, container, false)
+        mBinding.viewmodel = mReceiptsViewModel
+        mBinding.lifecycleOwner = this
 
         init()
         setObserver()
 
-        return binding.root
+        return mBinding.root
     }
 
     private fun init() {
-        binding.mealTypeReceiptsRv.setHasFixedSize(true)
+        mBinding.mealTypeReceiptsRv.setHasFixedSize(true)
 
         val spanCount = 2 // 2 columns
-        binding.mealTypeReceiptsRv.layoutManager = GridLayoutManager(activity, spanCount)
+        mBinding.mealTypeReceiptsRv.layoutManager = GridLayoutManager(activity, spanCount)
 
         val spacing = 20 // 20px
         val includeEdge = true
-        binding.mealTypeReceiptsRv.addItemDecoration(GridSpacingItemDecoration(spanCount, spacing, includeEdge))
+        mBinding.mealTypeReceiptsRv.addItemDecoration(GridSpacingItemDecoration(spanCount, spacing, includeEdge))
 
         mAdapterMealType = MealTypeReceiptsAdapter(activity as Context, mReceiptsArray, this)
-        binding.mealTypeReceiptsRv.adapter = mAdapterMealType
+        mBinding.mealTypeReceiptsRv.adapter = mAdapterMealType
 
-        binding.mealTypeHeaderText.text = arguments?.getString(Utils.INTENT_TRANSFER_MEAL_TYPE)
+        mBinding.mealTypeHeaderText.text = arguments?.getString(Utils.INTENT_TRANSFER_MEAL_TYPE)
 
     }
 
@@ -65,7 +62,7 @@ class MealTypeReceiptsFragment : BaseFragment(), MealTypeReceiptsAdapter.OnItemC
         val mealType = arguments?.getString(Utils.INTENT_TRANSFER_MEAL_TYPE) ?: ""
         val receiptsCount = 30
         mReceiptsViewModel.getReceipts(mealType, receiptsCount).observe(this, Observer<ArrayList<ReceiptModel>> {
-            Utils.enterTopAnimation(binding.mealTypeHeaderText, 500)
+            Utils.enterTopAnimation(mBinding.mealTypeHeaderText, 500)
             mReceiptsArray = it
             mAdapterMealType.setData(mReceiptsArray)
         })
