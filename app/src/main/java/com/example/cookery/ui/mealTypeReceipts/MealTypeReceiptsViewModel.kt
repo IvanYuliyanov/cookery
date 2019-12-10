@@ -3,6 +3,7 @@ package com.example.cookery.ui.mealTypeReceipts
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.cookery.R
 import com.example.cookery.base.BaseViewModel
 import com.example.cookery.rest.Repository
 import com.google.gson.JsonObject
@@ -47,15 +48,22 @@ class MealTypeReceiptsViewModel  @Inject constructor(repository: Repository) : B
                                 jsonObject.get("servings").asString,
                                 jsonObject.get("readyInMinutes").asInt))
                     }
-
-                    mReceipts?.value = mReceiptsResp
-                    getLoading().value = GONE
                 }
+                setData()
             }
 
             override fun onFailure(call: Call<JsonObject>, throwable: Throwable) {
                 Log.d(TAG, throwable.toString())
+                setData()
             }
         })
+    }
+
+    override fun setData() {
+        mReceipts?.value = mReceiptsResp
+        getLoading().value = GONE
+
+        if(mReceiptsResp.isEmpty())
+            getInfoTxt().value = context.getString(R.string.no_data)
     }
 }

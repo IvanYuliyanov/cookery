@@ -1,6 +1,7 @@
 package com.example.cookery.ui.mealTypeReceipts
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +18,7 @@ import com.example.cookery.globalClasses.Animations
 import com.example.cookery.globalClasses.GridSpacingItemDecoration
 import com.example.cookery.globalClasses.Utils
 import com.example.cookery.ui.receiptInstructions.ReceiptInstructionsFragment
+import javax.inject.Inject
 
 
 class MealTypeReceiptsFragment : BaseFragment(), MealTypeReceiptsAdapter.OnItemClickListener {

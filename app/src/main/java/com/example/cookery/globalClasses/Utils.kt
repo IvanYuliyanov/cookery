@@ -1,5 +1,9 @@
 package com.example.cookery.globalClasses
 
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
+
 class Utils {
     companion object {
         const val API_BASE_URL      = "https://api.spoonacular.com/"
@@ -9,5 +13,14 @@ class Utils {
 
         const val INTENT_TRANSFER_MEAL_TYPE  = "type"
         const val INTENT_TRANSFER_RECEIPT    = "receipt"
+
+        fun hasNetwork(context: Context): Boolean? {
+            var isConnected: Boolean? = false // Initial Value
+            val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            val activeNetwork: NetworkInfo? = connectivityManager.activeNetworkInfo
+            if (activeNetwork != null && activeNetwork.isConnected)
+                isConnected = true
+            return isConnected
+        }
     }
 }

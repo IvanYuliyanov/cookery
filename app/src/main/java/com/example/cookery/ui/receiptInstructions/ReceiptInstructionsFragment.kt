@@ -3,6 +3,7 @@ package com.example.cookery.ui.receiptInstructions
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
@@ -26,6 +27,10 @@ import com.example.cookery.ui.mealTypeReceipts.ReceiptModel
 
 
 class ReceiptInstructionsFragment : BaseFragment() {
+    companion object {
+        const val IMAGE_SIZE = "-636x393.jpg"
+    }
+
     private var mReceiptModel: ReceiptModel? = null
     private lateinit var mBinding: ReceiptInstructionsFragmentBinding
     private lateinit var mReceiptInstructionsViewModel: ReceiptInstructionsViewModel
@@ -57,11 +62,12 @@ class ReceiptInstructionsFragment : BaseFragment() {
         activity?.let {
             Glide
                 .with(it)
-                .load(Utils.API_IMAGE_URLS + mReceiptModel?.id + "-636x393.jpg")
+                .load(Utils.API_IMAGE_URLS + mReceiptModel?.id + IMAGE_SIZE)
                 .centerCrop()
                 .listener(object : RequestListener<Drawable> {
                     override fun onLoadFailed(e: GlideException?, model: Any?, target: com.bumptech.glide.request.target.Target<Drawable>?, isFirstResource: Boolean): Boolean {
-                        return false
+                        mBinding.receiptIv.setImageResource(R.drawable.ic_launcher_background)
+                        return true
                     }
                     override fun onResourceReady(resource: Drawable?, model: Any?, target: com.bumptech.glide.request.target.Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
                         //do something when picture already loaded
@@ -74,8 +80,8 @@ class ReceiptInstructionsFragment : BaseFragment() {
 
         mReceiptModel?.let {
             mBinding.receiptTitleTv.text = it.title
-            mBinding.receiptTimeTv.text = it.readyInMinutes.toString() + " min"
-            mBinding.servingsTv.text = it.servings + " servings"
+            mBinding.receiptTimeTv.text = TextUtils.concat(it.readyInMinutes.toString(), " ", getString(R.string.min))
+            mBinding.servingsTv.text = TextUtils.concat(it.servings, " ", getString(R.string.servings))
         }
 
         Animations.enterTopAnimation(mBinding.descContainer, 750)
@@ -88,7 +94,7 @@ class ReceiptInstructionsFragment : BaseFragment() {
 
             for (receiptInstruction in mReceiptInstructions){
                 val step = TextView(activity)
-                step.text = HtmlCompat.fromHtml(("<b><big><big>" + receiptInstruction.stepNumber + "</big></big></b>" + " " + receiptInstruction.instruction), HtmlCompat.FROM_HTML_MODE_LEGACY)
+                step.text = HtmlCompat.fromHtml((TextUtils.concat("<b><big><big>", receiptInstruction.stepNumber, "</big></big></b>", " ", receiptInstruction.instruction).toString()), HtmlCompat.FROM_HTML_MODE_LEGACY)
                 step.setTextColor(ContextCompat.getColor(activity as Context, android.R.color.white))
                 step.setPadding(32,16,32,16)
                 step.setTextSize(TypedValue.COMPLEX_UNIT_SP,16f)
