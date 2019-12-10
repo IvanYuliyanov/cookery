@@ -1,6 +1,7 @@
 # cookery
+Simple application which give you cookery receipts in a different categories. You can choose the best for you and see detailed ingradients. 
 
-Project with MVVM architecture, which inlude the folowing android architecure components:
+The project using MVVM architecture, which inlude the folowing android architecure components:
 * ViewModel
 * LiveData
 * DataBinding
