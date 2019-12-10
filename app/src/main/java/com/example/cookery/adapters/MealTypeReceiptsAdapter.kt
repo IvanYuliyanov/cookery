@@ -10,6 +10,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.cookery.R
+import com.example.cookery.globalClasses.Animations
 import com.example.cookery.globalClasses.Utils
 import com.example.cookery.interfaces.BindAdapter
 import com.example.cookery.ui.mealTypeReceipts.ReceiptModel
@@ -53,7 +54,7 @@ class MealTypeReceiptsAdapter (context: Context, receipts : ArrayList<ReceiptMod
 
         holder.time.text = receiptModel?.readyInMinutes.toString() + " min"
 
-        Utils.animateRecyclerViewItemOnScroll(holder.container, 250)
+        Animations.animateRecyclerViewItemOnScroll(holder.container, 250)
     }
 
     class ReceiptViewHolder(v: View) : RecyclerView.ViewHolder(v) {

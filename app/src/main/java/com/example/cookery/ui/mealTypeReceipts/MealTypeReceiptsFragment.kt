@@ -13,6 +13,7 @@ import com.example.cookery.R
 import com.example.cookery.adapters.MealTypeReceiptsAdapter
 import com.example.cookery.base.BaseFragment
 import com.example.cookery.databinding.MealTypeReceiptsFragmentBinding
+import com.example.cookery.globalClasses.Animations
 import com.example.cookery.globalClasses.GridSpacingItemDecoration
 import com.example.cookery.globalClasses.Utils
 import com.example.cookery.ui.receiptInstructions.ReceiptInstructionsFragment
@@ -62,7 +63,7 @@ class MealTypeReceiptsFragment : BaseFragment(), MealTypeReceiptsAdapter.OnItemC
         val mealType = arguments?.getString(Utils.INTENT_TRANSFER_MEAL_TYPE) ?: ""
         val receiptsCount = 30
         mReceiptsViewModel.getReceipts(mealType, receiptsCount).observe(this, Observer<ArrayList<ReceiptModel>> {
-            Utils.enterTopAnimation(mBinding.mealTypeHeaderText, 500)
+            Animations.enterTopAnimation(mBinding.mealTypeHeaderText, 500)
             mReceiptsArray = it
             mAdapterMealType.setData(mReceiptsArray)
         })

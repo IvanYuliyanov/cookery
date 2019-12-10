@@ -5,13 +5,13 @@ import com.google.gson.JsonObject
 import retrofit2.Call
 import javax.inject.Inject
 
-class Repository @Inject constructor(val repoService: Receipts) {
+class Repository @Inject constructor(private val repoService: Receipts) {
 
-    fun getReceipts(mealType : String, number : Int, apiKey : String): Call<JsonObject> {
-        return repoService.getReceiptsByType(mealType, number, apiKey)
+    fun getReceipts(mealType : String, number : Int): Call<JsonObject> {
+        return repoService.getReceiptsByType(mealType, number)
     }
 
-    fun getAnalyzedInstructions(receiptId : Long, apiKey: String): Call<JsonArray> {
-        return repoService.getAnalyzedInstructions(receiptId, apiKey)
+    fun getAnalyzedInstructions(receiptId : Long): Call<JsonArray> {
+        return repoService.getAnalyzedInstructions(receiptId)
     }
 }

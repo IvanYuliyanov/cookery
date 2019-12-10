@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.cookery.base.BaseViewModel
-import com.example.cookery.globalClasses.Utils
 import com.example.cookery.rest.Repository
 import com.google.gson.JsonObject
 import retrofit2.Call
@@ -30,7 +29,7 @@ class MealTypeReceiptsViewModel  @Inject constructor(repository: Repository) : B
     }
 
     private fun loadReceipts(mealType : String, count : Int) {
-        mRepository.getReceipts( mealType, count, Utils.API_KEY).enqueue(object : Callback<JsonObject> {
+        mRepository.getReceipts( mealType, count).enqueue(object : Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                 Log.d(TAG, call.request().toString())
                 Log.d(TAG, response.body().toString())

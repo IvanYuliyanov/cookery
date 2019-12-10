@@ -20,6 +20,7 @@ import com.bumptech.glide.request.RequestListener
 import com.example.cookery.R
 import com.example.cookery.base.BaseFragment
 import com.example.cookery.databinding.ReceiptInstructionsFragmentBinding
+import com.example.cookery.globalClasses.Animations
 import com.example.cookery.globalClasses.Utils
 import com.example.cookery.ui.mealTypeReceipts.ReceiptModel
 
@@ -64,7 +65,7 @@ class ReceiptInstructionsFragment : BaseFragment() {
                     }
                     override fun onResourceReady(resource: Drawable?, model: Any?, target: com.bumptech.glide.request.target.Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
                         //do something when picture already loaded
-                        Utils.animateRecyclerViewItemOnScroll(mBinding.receiptIv, 500)
+                        Animations.animateRecyclerViewItemOnScroll(mBinding.receiptIv, 500)
                         return false
                     }
                 })
@@ -77,7 +78,7 @@ class ReceiptInstructionsFragment : BaseFragment() {
             mBinding.servingsTv.text = it.servings + " servings"
         }
 
-        Utils.enterTopAnimation(mBinding.descContainer, 750)
+        Animations.enterTopAnimation(mBinding.descContainer, 750)
     }
 
     private fun setObserver() {
@@ -94,7 +95,7 @@ class ReceiptInstructionsFragment : BaseFragment() {
                 mBinding.instructionStepsContainer.addView(step)
             }
 
-            Utils.animateRecyclerViewItemOnScroll(mBinding.instructionStepsContainer, 500)
+            Animations.animateRecyclerViewItemOnScroll(mBinding.instructionStepsContainer, 500)
         })
     }
 }

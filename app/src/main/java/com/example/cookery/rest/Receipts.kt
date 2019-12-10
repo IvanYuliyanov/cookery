@@ -11,9 +11,9 @@ import retrofit2.http.Query
 interface Receipts {
     @GET("recipes/search")
     @Headers("Content-Type: application/json")
-    fun getReceiptsByType(@Query("query") mealType: String, @Query("number") number: Int, @Query("apiKey") apiKey: String): Call<JsonObject>
+    fun getReceiptsByType(@Query("query") mealType: String, @Query("number") number: Int): Call<JsonObject>
 
     @GET("recipes/{id}/analyzedInstructions")
     @Headers("Content-Type: application/json")
-    fun getAnalyzedInstructions(@Path("id") receiptId : Long, @Query("apiKey") apiKey: String): Call<JsonArray>
+    fun getAnalyzedInstructions(@Path("id") receiptId : Long): Call<JsonArray>
 }

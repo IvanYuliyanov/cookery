@@ -31,7 +31,7 @@ class ReceiptInstructionsViewModel @Inject constructor(repository: Repository) :
     }
 
     private fun loadInstructions(id : Long) {
-        mRepository.getAnalyzedInstructions(id, Utils.API_KEY).enqueue(object : retrofit2.Callback<JsonArray> {
+        mRepository.getAnalyzedInstructions(id).enqueue(object : retrofit2.Callback<JsonArray> {
             override fun onResponse(call: Call<JsonArray>, response: Response<JsonArray>) {
                 Log.d(TAG, call.request().toString())
                 Log.d(TAG, response.body().toString())

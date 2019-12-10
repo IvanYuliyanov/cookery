@@ -8,8 +8,8 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cookery.R
+import com.example.cookery.globalClasses.Animations
 import com.example.cookery.globalClasses.MealTypes
-import com.example.cookery.globalClasses.Utils
 
 class ReceiptsAdapter (mealTypes : Array<String>, listener: OnItemClickListener) : RecyclerView.Adapter<ReceiptsAdapter.MealTypeViewHolder>() {
     interface OnItemClickListener {
@@ -36,7 +36,7 @@ class ReceiptsAdapter (mealTypes : Array<String>, listener: OnItemClickListener)
             mListener.onItemClick(mMealTypes[position])
         }
 
-        Utils.animateRecyclerViewItemOnScroll(holder.container, 250)
+        Animations.animateRecyclerViewItemOnScroll(holder.container, 250)
     }
 
     class MealTypeViewHolder(v: View) : RecyclerView.ViewHolder(v) {
