@@ -2,6 +2,7 @@ package com.example.cookery.ui.mealTypeReceipts
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.opengl.Visibility
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.cookery.R
 import com.example.cookery.adapters.MealTypeReceiptsAdapter
 import com.example.cookery.base.BaseFragment
+import com.example.cookery.base.BaseViewModel
 import com.example.cookery.databinding.MealTypeReceiptsFragmentBinding
 import com.example.cookery.globalClasses.Animations
 import com.example.cookery.globalClasses.GridSpacingItemDecoration
@@ -68,6 +70,11 @@ class MealTypeReceiptsFragment : BaseFragment(), MealTypeReceiptsAdapter.OnItemC
             Animations.enterTopAnimation(mBinding.mealTypeHeaderText, 500)
             mReceiptsArray = it
             mAdapterMealType.setData(mReceiptsArray)
+
+            mBinding.progressBar.visibility = View.GONE
+            if(mReceiptsArray.isEmpty())
+                mBinding.infoText.text = getString(R.string.no_data)
+
         })
     }
 

@@ -20,6 +20,7 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.example.cookery.R
 import com.example.cookery.base.BaseFragment
+import com.example.cookery.base.BaseViewModel
 import com.example.cookery.databinding.ReceiptInstructionsFragmentBinding
 import com.example.cookery.globalClasses.Animations
 import com.example.cookery.globalClasses.Utils
@@ -102,6 +103,11 @@ class ReceiptInstructionsFragment : BaseFragment() {
             }
 
             Animations.animateRecyclerViewItemOnScroll(mBinding.instructionStepsContainer, 500)
+
+            mBinding.progressBar.visibility = View.GONE
+
+            if(mReceiptInstructions.isEmpty())
+                mBinding.infoText.text = getString(R.string.no_data)
         })
     }
 }

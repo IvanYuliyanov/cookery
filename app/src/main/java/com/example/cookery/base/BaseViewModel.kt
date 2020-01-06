@@ -9,7 +9,7 @@ import javax.inject.Inject
 open class BaseViewModel : ViewModel() {
     companion object {
         const val VISIBLE = 0
-        const val GONE = 8
+        const val GONE    = 8
     }
 
     @Inject
@@ -36,9 +36,5 @@ open class BaseViewModel : ViewModel() {
         }
 
         return infoText as MutableLiveData<String>
-    }
-
-    protected open fun setData(){
-
     }
 }

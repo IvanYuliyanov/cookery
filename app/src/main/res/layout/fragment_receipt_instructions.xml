@@ -90,7 +90,7 @@
                         android:layout_toEndOf                  ="@+id/receipt_time_tv"
                         android:layout_below                    ="@+id/receipt_title_tv"
                         android:scaleType                       ="centerCrop"
-                        android:layout_marginStart="16dp"
+                        android:layout_marginStart              ="16dp"
                         android:padding                         ="5dp"
                         android:drawablePadding                 ="5dp"
                         android:textColor                       ="@android:color/white"
