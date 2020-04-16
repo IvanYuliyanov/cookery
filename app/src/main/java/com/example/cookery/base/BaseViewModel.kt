@@ -22,7 +22,7 @@ open class BaseViewModel : ViewModel() {
 
         if (showLoading == null) {
             showLoading = MutableLiveData()
-            showLoading?.value = GONE
+            showLoading?.value = GONEE
         }
 
         return showLoading as MutableLiveData<Int>
