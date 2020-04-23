@@ -26,4 +26,7 @@ jobs:
         path: private-repo
 
     - name: Copy file test
-      run: cp private-repo/test-private-repo-file test-private-repo-file
+      run: cp private-repo/README.md README.md
+
+    - name: Build
+      run: ./gradlew build
