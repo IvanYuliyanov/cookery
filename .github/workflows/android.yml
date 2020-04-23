@@ -25,7 +25,8 @@ jobs:
         path: testrepository
 
     - name: Copy file test
-      run: cp test.txt IvanYuliyanov/testrepository/test.txt
+      run: cp test.txt https://github.com/IvanYuliyanov/testrepository/test.txt
+
 
     - name: Build with Gradle
       run: ./gradlew build
