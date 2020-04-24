@@ -21,4 +21,4 @@ jobs:
     - name: Copy file test
       run: |
             mkdir -p app/src/release
-            echo "${{ secrets.TEST }}" > app/src/release/translations.gradle
+            echo '${{ secrets.TEST }}' > app/src/release/translations.gradle
