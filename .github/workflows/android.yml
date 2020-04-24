@@ -21,4 +21,4 @@ jobs:
     - name: Copy file test
       run: |
             mkdir -p app/src/release
-            echo '${{ secrets.TEST }}' > app/src/release/gradle.properties
+            echo '${{ secrets.TEST }}' > app/src/release/google-services.json
