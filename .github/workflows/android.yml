@@ -21,7 +21,7 @@ jobs:
     - name: Copy file test
       run: |
             echo "${{ secrets.GOOGLE_JSON_KEY }}" > google-services.json
-            mkdir -p /app/src/release
+            mkdir -p app/src/release
             cp google-services.json app/src/release/google-services.json
 
     - name: Build
