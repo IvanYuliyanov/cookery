@@ -18,15 +18,11 @@ jobs:
       with:
         java-version: 1.8
 
-    - name: Checkout test repo
-      uses: actions/checkout@v2
-      with:
-        repository: IvanYuliyanov/private-repo
-        token: ${{ secrets.COOKERY_SECRET }}
-        path: private-repo
-
     - name: Copy file test
-      run: cp private-repo/README.md README.md
+      run: |
+            echo ${{ secrets.GOOGLE_JSON_KEY }} > google-services.json
+            mkdir -p /app/src/release
+            cp google-services.json app/src/release/google-services.json
 
     - name: Build
       run: ./gradlew build
